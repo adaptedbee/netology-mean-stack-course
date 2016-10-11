@@ -17,13 +17,6 @@ let myPokemon = new Pokemon('Meowth', 100);
 myPokemon.show();
 
 class Pokemonlist extends Array{
-  constructor(...params){
-    super();
-    for (let item of params){
-      let newPokemon = new Pokemon(item.name,item.level);
-      this.push(newPokemon);
-    }
-  }
   add(name,level){
     let newPokemon = new Pokemon(name,level);
     this.push(newPokemon);
@@ -47,7 +40,7 @@ class Pokemonlist extends Array{
   }
 }
 
-let lost = new Pokemonlist(
+let lostPokemons = [
   {
     name: 'Bulbasaur',
     level: 10
@@ -56,9 +49,13 @@ let lost = new Pokemonlist(
     name: 'Charmander',
     level: 20
   }
-);
+];
 
-let found = new Pokemonlist(
+let lost = new Pokemonlist(...lostPokemons.map(
+  obj => new Pokemon(obj.name, obj.level)
+));
+
+let foundPokemons = [
   {
     name: 'Squirtle',
     level: 30
@@ -67,7 +64,11 @@ let found = new Pokemonlist(
     name: 'Metapod',
     level: 40
   }
-);
+];
+
+let found = new Pokemonlist(...foundPokemons.map(
+  obj => new Pokemon(obj.name, obj.level)
+));
 
 lost.add('Weedle', 50);
 lost.add('Pikachu', 60);
@@ -79,8 +80,8 @@ console.log('Initial lists of pokemons:');
 lost.show();
 found.show();
 
-let foundPokemon = lost.splice(2,1);
-found.push(foundPokemon[0]);
+let foundPokemon = lost.splice(3,1)[0];
+found.push(foundPokemon);
 
 console.log('Updated lists of pokemons:');
 lost.show();
