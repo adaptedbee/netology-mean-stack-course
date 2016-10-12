@@ -63,4 +63,4 @@ lost.show();
 found.show();
 
 console.log('The strongest in lost list:');
-lost.max();
+lost.max().show();
