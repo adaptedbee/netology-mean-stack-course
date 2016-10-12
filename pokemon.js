@@ -17,58 +17,33 @@ let myPokemon = new Pokemon('Meowth', 100);
 myPokemon.show();
 
 class Pokemonlist extends Array{
+  constructor(...items){
+    items = items.filter(
+      item => item instanceof Pokemon
+    );
+    super(...items);
+  }
   add(name,level){
     let newPokemon = new Pokemon(name,level);
     this.push(newPokemon);
   }
   show(){
-    for (let item of this){
+    this.forEach(function(item){
       item.show();
-    }
+    });
     console.log(`There are ${this.length} pokemons here.`);
   }
   max(){
-    let maxLevel = null, strongestPokemon;
-    for (let item of this){
-      if ((item.valueOf() > maxLevel)||(maxLevel==null)){
-        maxLevel = item.valueOf();
-        strongestPokemon = item;
-      }
-    }
-    this.show();
-    return strongestPokemon;
+    let strongestPokemon = Math.max(...this);
+    return this.find(
+      item => item.level==strongestPokemon
+    );
   }
 }
 
-let lostPokemons = [
-  {
-    name: 'Bulbasaur',
-    level: 10
-  },
-  {
-    name: 'Charmander',
-    level: 20
-  }
-];
+let lost = new Pokemonlist(new Pokemon('Bulbasaur', 10), new Pokemon('Charmander', 20), {name:'NotPokemon',level:0});
 
-let lost = new Pokemonlist(...lostPokemons.map(
-  obj => new Pokemon(obj.name, obj.level)
-));
-
-let foundPokemons = [
-  {
-    name: 'Squirtle',
-    level: 30
-  },
-  {
-    name: 'Metapod',
-    level: 40
-  }
-];
-
-let found = new Pokemonlist(...foundPokemons.map(
-  obj => new Pokemon(obj.name, obj.level)
-));
+let found = new Pokemonlist(new Pokemon('Squirtle', 30), new Pokemon('Metapod', 40), {});
 
 lost.add('Weedle', 50);
 lost.add('Pikachu', 60);
