@@ -15,46 +15,59 @@ const hide = (folder, pokemonsList, callback) => {
 
   let hiddenPokemons = new Pokemonlist();
 
-  for (let n = 1; n <=randomPokemonsNumber; n++){
-    let randomFolderNumber = random(1,10);
-
-    let randomPokemon = pokemonsList[random(0,pokemonsList.length-1)];
-    let randomPokemonData = `${randomPokemon.name}|${randomPokemon.level}`;
-
-    fs.readdir(folder, function(err, files) {
+    fs.readdir(folder, (err, files) => {
       if (err) return console.error(err);
-      let filepath = folder + files[randomFolderNumber-1].toString();
-      fs.readdir(filepath, function(err, files) {
-        if (err) return console.error(err);
-        if (files.length==0) {
-          fs.writeFile(filepath + '/pokemon.txt', randomPokemonData, function(err){
-            if (err) return console.error(err);
-            hiddenPokemons.push(randomPokemon);
-            if (hiddenPokemons.length==randomPokemonsNumber) callback(hiddenPokemons);
-          });
-        }
-      });
+
+      let foldersList = files;
+      for (let n = 1; n <=randomPokemonsNumber; n++){
+        let randomPokemonIndex = random(0,pokemonsList.length-1);
+        let randomPokemon = pokemonsList[randomPokemonIndex];
+        pokemonsList.splice(randomPokemonIndex,1);
+        let randomPokemonData = `${randomPokemon.name}|${randomPokemon.level}`;
+
+        let randomFolderNumber = random(1, foldersList.length);
+        let filepath = folder + foldersList[randomFolderNumber-1].toString();
+
+        fs.writeFile(filepath + '/pokemon.txt', randomPokemonData, function(err){
+          if (err) return console.error(err);
+          hiddenPokemons.push(randomPokemon);
+          foldersList.splice(randomFolderNumber-1,1);
+          if (hiddenPokemons.length==randomPokemonsNumber) callback(hiddenPokemons);
+        });
+      }
     });
-  }
+
+  // }
+};
+
+const getPokemon = (filepath) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filepath + '/pokemon.txt', 'utf8', (err, data) => {
+      resolve(err ? null : data);
+    });
+  });
 };
 
 const seek = (folder, callback) => {
-  fs.readdir(folder, function(err, files) {
+
+  let foundPokemons = new Pokemonlist();
+
+  fs.readdir(folder, (err, files) => {
     if (err) return console.error(err);
-    let foundPokemons = new Pokemonlist();
 
-    for (let folderNumber = 0; folderNumber<files.length; folderNumber++){
-      let filepath = folder + files[folderNumber].toString();
-      let insideFiles = fs.readdirSync(filepath);
-      if (insideFiles.length!=0) {
-        let data = fs.readFileSync(filepath + '/pokemon.txt', 'utf8');
-        let foundPokemonData = data.split('|');
-        let foundPokemon = new Pokemon(foundPokemonData[0], foundPokemonData[1]);
-        foundPokemons.push(foundPokemon);
-      };
-      if (folderNumber==files.length-1) callback(foundPokemons);
-    };
+    let foundPokemonsArray = files.map(file => getPokemon(folder + file.toString()));
 
+    Promise.all(foundPokemonsArray).then((array) => {
+      array.forEach((item) => {
+          if (item != null) {
+            let foundPokemonData = item.split('|');
+            let foundPokemon = new Pokemon(foundPokemonData[0], parseInt(foundPokemonData[1]));
+            foundPokemons.push(foundPokemon);
+          };
+        }
+      );
+      callback(foundPokemons);
+    });
   });
 
 };
