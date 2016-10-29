@@ -37,7 +37,6 @@ const hide = (folder, pokemonsList, callback) => {
       }
     });
 
-  // }
 };
 
 const getPokemon = (filepath) => {
