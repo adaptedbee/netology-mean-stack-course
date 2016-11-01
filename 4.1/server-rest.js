@@ -16,7 +16,7 @@ router.post("/users", (req, res) => {
   let newUser = {
     id: Date.now(),
     name: req.body.name,
-    amount: req.body.score
+    score: req.body.score
   };
   users.push(newUser);
   usersJSON = JSON.stringify(users);
@@ -24,7 +24,41 @@ router.post("/users", (req, res) => {
 });
 
 router.get("/users", (req, res) => {
-  res.status(200).json(usersJSON);
+  let offset = req.body.offset;
+  let limit = req.body.limit;
+  let name = req.body.name;
+  let score = req.body.score;
+  let selectedUsers = users;
+
+  if (name !== undefined) {
+    selectedUsers = selectedUsers.filter((item) => {
+      return item.name.indexOf(name) != -1;
+    });
+  };
+
+  if (score !== undefined) {
+    selectedUsers = selectedUsers.filter((item) => {
+      return item.score == score;
+    });
+  };
+
+  if (offset === undefined) {
+    offset = 1;
+  };
+  if (limit === undefined) {
+    limit = selectedUsers.length;
+  };
+
+  if ((offset >= 1) && (offset < selectedUsers.length) && (limit > 0) && (name.length>0)) {
+    if (offset-1+limit < selectedUsers.length) {
+      selectedUsers = selectedUsers.slice(offset-1, offset-1+limit);
+    } else {
+      selectedUsers = selectedUsers.slice(offset-1, selectedUsers.length);
+    };
+    res.status(200).json(JSON.stringify(selectedUsers));
+  } else {
+    res.status(400).json({ message: 'Bad Request' });
+  }
 });
 
 router.get("/users/:id", (req, res) => {
