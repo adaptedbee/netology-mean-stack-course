@@ -5,7 +5,7 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
 const port = process.env.PORT || 1337;
-const url = `mongodb://localhost:27017/testbase`;
+const url = 'mongodb://localhost:27017/testbase';
 let db;
 
 MongoClient.connect(url, (err, database) => {
