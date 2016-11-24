@@ -1,24 +1,15 @@
-<style>
-    .ng-dirty.ng-invalid {
-        border-color: #FA787E;
-    }
-
-    .ng-dirty.ng-valid {
-        border-color: #78FA89;
-    }
-
-</style>
-
-<form name="edit" novalidate data-ng-submit="save(edit)" data-layout="row" novalidate>
+<form name="edit" novalidate data-ng-submit="save(edit)" data-layout="row">
     <label>
-        <input class="full-width" name="input" type="text" title="" autocomplete="off" data-ng-minlength="3" data-ng-model="editValue" />
+        <input class="full-width" name="input" type="text" title="" data-ng-minlength="3" autocomplete="off"
+               data-ng-model="editValue"
+               data-ng-class="{ error: edit.$dirty && hasError(edit.input.$error)}"/>
+        <div class="help-block" ng-messages="edit.input.$error" ng-if="edit.input.$invalid">
+            <p ng-message="minlength"><i>Имя должно быть не менее 3 символов</i></p>
+        </div>
     </label>
-    <div class="help-block" ng-messages="edit.input.$error" ng-if="edit.input.$invalid">
-      <p ng-message="minlength"><i>Имя должно быть не менее 3 символов</i></p>
-    </div>
 
     <div>
-        <button class="btn-call-to-action btn-small" type="submit" data-ng-disabled="pokemonForm.$invalid">
+        <button class="btn-call-to-action btn-small" type="submit">
             Save
         </button>
         <button class="btn-cancel btn-small" type="button" data-ng-click="cancel()">

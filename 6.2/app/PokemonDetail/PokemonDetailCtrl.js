@@ -106,13 +106,13 @@ angular
 
                     if (form.$valid) {
                         // scope.ndSaveFn(childScope.editValue).finally(function () {
-                            // cancel();
+                        //     cancel();
+                        // });
                         scope.ndModel = form.input.$viewValue;
                         getInnerElement().replaceWith(scope.ndModel);
                         initialized = false;
                         childScope.$destroy();
                         return;
-                        // });
                     }
                 }
 
