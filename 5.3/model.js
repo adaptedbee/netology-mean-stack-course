@@ -8,7 +8,7 @@ const UserSchema = new Schema({
 const TodoSchema = new Schema({
   name: String,
   opened: Boolean,
-  user: Number
+  user: mongoose.Schema.ObjectId
 });
 
 const User = mongoose.model('User', UserSchema, 'users');
