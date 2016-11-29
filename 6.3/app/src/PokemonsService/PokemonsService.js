@@ -42,6 +42,14 @@ angular
                         method: 'DELETE',
                         url: 'https://api.backendless.com/v1/data/pokemon/' + pokemonId
                     });
+                },
+
+                updatePokemon: function(pokemonId, pokemonData) {
+                    return $http({
+                        method: 'PUT',
+                        url: 'https://api.backendless.com/v1/data/pokemon/' + pokemonId,
+                        data: pokemonData
+                    });
                 }
 
             }

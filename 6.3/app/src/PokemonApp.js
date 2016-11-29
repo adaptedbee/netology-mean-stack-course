@@ -19,6 +19,10 @@ config(['$routeProvider',
             templateUrl: 'src/CreatePokemon/CreatePokemon.html',
             controller: 'CreatePokemonCtrl'
         }).
+        when('/edit/:pokemonId', {
+            templateUrl: 'src/EditPokemon/EditPokemon.html',
+            controller: 'EditPokemonCtrl'
+        }).
         when('/realtime/:userName', {
             templateUrl: 'src/PokemonRealtime/PokemonRealtime.html',
             controller: 'PokemonRealtimeCtrl'

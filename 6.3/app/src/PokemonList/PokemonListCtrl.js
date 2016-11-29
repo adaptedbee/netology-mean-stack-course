@@ -28,8 +28,6 @@ pokemonApp.controller('PokemonListCtrl', function($scope, PokemonsService, Berri
     var request1 = PokemonsService.getPokemons();
     var request2 = BerriesService.getBerries();
     $q.all([request1, request2]).then(function(values){
-        // obj1 = values[0].data;
-        // obj2 = values[1];
         $scope.pokemons = values[0].data.results;
         $scope.pokemonsLoaded = true;
 
