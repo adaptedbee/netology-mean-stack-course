@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                Connection:
+                {{ MySocket.status() }}
+
+            </div>
+        </div>
+
+        <form name="pokemonForm" novalidate ng-submit="submit(new_message)">
+            <div class="form-group">
+                <label>Имя</label>
+                <input class="form-control" ng-model="username" type="text" placeholder="Имя">
+            </div>
+            <div class="form-group">
+                <label>Сообщение</label>
+                <input class="form-control" ng-model="new_message" type="text" placeholder="Сообщение" autofocus required>
+            </div>
+            <button type="submit" class="btn btn-default" ng-disabled="pokemonForm.$invalid">Отправить</button>
+        </form>
+
+    </div>
+    <div class="col-md-8">
+
+        <div class="list-group">
+            <div class="list-group-item" ng-repeat="message in MySocket.collection | orderBy:'-timeStamp' track by $index">
+                <h4 class="list-group-item-heading">
+                    {{ message.username | uppercase }}
+                </h4>
+                <p class="list-group-item-text">
+                    <small>{{ message.timeStamp | date:'medium' }}</small>
+                    <br>
+                    {{ message.content }}
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
