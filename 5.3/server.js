@@ -45,7 +45,8 @@ router.route('/users')
 router.get('/users/stats', (req, res) => {
   res.json({ message: 'Stats' });
 
-  model.Todo.aggregate({$match: {opened: true}, {$unwind: "$user"}, {$project: {name:1, opened:1, user:1, count: {$add: [1]}}}, {$group: {_id: "$user", number: {$sum: "$count"}}}, {$sort: {number: -1}})
+  //
+  model.Todo.aggregate({$match: {opened: false}}, {$unwind: "$user"}, {$project: {name:1, opened:1, user:1, count: {$add: [1]}}}, {$group: {_id: "$user", number: {$sum: "$count"}}}, {$sort: {number: -1}})
     .exec((err, users) => {
       if (err) {
         res.send(err);
