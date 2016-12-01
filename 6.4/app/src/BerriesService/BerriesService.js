@@ -2,8 +2,8 @@ angular
     .module('PokemonApp')
     .factory('BerriesService', function($resource, $http) {
 
-        return $resource('https://api.backendless.com/v1/data/pokemon/:pokemonId/', {
-            pokemonId: '@pokemonId'
+        return $resource('https://api.backendless.com/v1/data/berries/:berryId/', {
+            berryId: '@berryId'
         }, {
             query: {
                 method: 'GET',

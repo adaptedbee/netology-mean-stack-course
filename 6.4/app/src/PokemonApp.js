@@ -35,8 +35,8 @@ module('PokemonApp')
 
 .config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.headers.common = {
-        "application-id": "4B730C92-F81E-236B-FFF0-6651FE882800",
-        "secret-key": "CB6DE86C-6069-86C4-FF1C-9049D5AC9400"
+        "application-id": "FA990639-222E-29E0-FF58-DEF01A2D0300",
+        "secret-key": "37178C9F-5803-AAE4-FF5E-184AB76C4100"
     };
 
 }]);
