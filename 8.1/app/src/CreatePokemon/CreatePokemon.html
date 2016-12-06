@@ -1,0 +1,50 @@
+<md-content class="md-padding" style="max-width: 400px;">
+
+    <md-card>
+        <md-card-header>
+            <md-card-avatar>
+                <img class="md-user-avatar" src="./assets/img/card-avatar.png" alt="Новый покемон"/>
+            </md-card-avatar>
+            <md-card-header-text>
+                <span class="md-title">Новый покемон</span>
+                <span class="md-subhead">Это хорошо</span>
+            </md-card-header-text>
+        </md-card-header>
+        <img ng-src="./assets/img/card-bg.jpg" class="md-card-image" alt="Новый покемон">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Вот вам форма</span>
+                <span class="md-subhead">Давайте ее заполним</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+
+            <form name="pokemonForm" novalidate>
+
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Имя</label>
+                    <input ng-model="newPokemon.name" required>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Вес</label>
+                    <input ng-model="newPokemon.weight">
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Рост</label>
+                    <input ng-model="newPokemon.height">
+                </md-input-container>
+
+                <md-switch ng-model="newPokemon.active" aria-label="Активен">
+                    Активен
+                </md-switch>
+
+                <md-button class="md-raised md-primary" ng-click="createPokemon(newPokemon)" ng-disabled="pokemonForm.$invalid">Добавить</md-button>
+
+            </form>
+
+        </md-card-content>
+    </md-card>
+
+</md-content>
