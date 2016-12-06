@@ -1,8 +1,16 @@
-
+<!--
     <a href="#/pokemons/{{$ctrl.pokemon.objectId }}" class="list-group-item">
 
         <h4>
             {{$ctrl.pokemon.name | uppercase }}
         </h4>
 
-    </a>
+    </a> -->
+
+<md-list-item class="md-2-line" href="#/pokemons/{{$ctrl.pokemon.objectId }}">
+  <!-- <img ng-src="{{todos[0].face}}?20" class="md-avatar" alt="{{todos[0].who}}" /> -->
+  <div class="md-list-item-text">
+    <h3>{{$ctrl.pokemon.name | uppercase }}</h3>
+    <!-- <p>Secondary text</p> -->
+  </div>
+</md-list-item>
