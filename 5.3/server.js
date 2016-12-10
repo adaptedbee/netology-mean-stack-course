@@ -46,7 +46,35 @@ router.get('/users/stats', (req, res) => {
   res.json({ message: 'Stats' });
 
   //
-  model.Todo.aggregate({$match: {opened: false}}, {$unwind: "$user"}, {$project: {name:1, opened:1, user:1, count: {$add: [1]}}}, {$group: {_id: "$user", number: {$sum: "$count"}}}, {$sort: {number: -1}})
+  model.User.aggregate({
+      $lookup: {
+          "from" : "Todo",
+          "localField" : "_id",
+          "foreignField" : "user",
+          "as" : "usertasks"
+      }
+    },
+    {
+      $unwind: '$usertasks'
+    },
+    {
+      $match: {
+        'usertasks.opened': false
+      }
+    },
+    {
+      $project: {
+        'name': 1,
+        'usertasks': 1,
+        'count': {$add: [1]}
+      }
+    },
+    {
+      $group: {
+        _id: '$name',
+        number: {$sum: "$count"}
+      }
+    })
     .exec((err, users) => {
       if (err) {
         res.send(err);
