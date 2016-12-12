@@ -2,8 +2,8 @@ describe('PokemonApp berries page', function() {
     it('should contain a berries list', function() {
         browser.get('http://localhost:8000/app/#!/berries');
 
-        var firstBerryName = element(by.repeater('singleBerry in berries').row(0).column('singleBerry.name'));
+        var berriesList = element.all(by.repeater('singleBerry in berries'));
 
-        expect(firstBerryName).not.toBe(undefined);
+        expect(berriesList.length).not.toEqual(0);
     });
 });
