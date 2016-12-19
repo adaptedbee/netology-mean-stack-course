@@ -1,0 +1,29 @@
+{
+  "name": "tdd-kata-js",
+  "version": "1.0.0",
+  "description": "TDD Kata",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmartStepGroupTrainings/netology-js-tdd.git"
+  },
+  "keywords": [
+    "tdd",
+    "js",
+    "kata",
+    "testing"
+  ],
+  "author": "DP",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SmartStepGroupTrainings/netology-js-tdd/issues"
+  },
+  "homepage": "https://github.com/SmartStepGroupTrainings/netology-js-tdd#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  }
+}
