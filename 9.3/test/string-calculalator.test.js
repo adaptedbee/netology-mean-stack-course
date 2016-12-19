@@ -34,7 +34,7 @@ describe('string calculator should', function() {
         assert.equal(sum, 1 + 2 + 3 + 4 + 5);
     });
 
-    it('return sum of two numbers separated by new line', function() {
+    it('return sum of unknown amount of numbers separated by new line', function() {
         var calculator = new Calculator();
 
         var sum = calculator.add("1\n2,3")
