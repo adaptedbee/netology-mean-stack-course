@@ -50,4 +50,12 @@ describe('string calculator should', function() {
         assert.equal(sum, 3);
     });
 
+    it('return sum of unknown amount of numbers separated by custom delimeter if first line is not provided', function() {
+        var calculator = new Calculator();
+
+        var sum = calculator.add("1@2");
+
+        assert.equal(sum, 3);
+    });
+
 });

@@ -7,29 +7,41 @@ var Calculator = function() {
             return 0;
         }
 
-        var numbers;
+        var numbers = [];
+        var customDelimeter;
+        var reg;
+        var hasDelimeters = false;
 
-        if ((input.indexOf(',') === -1) && (input.indexOf('\n') === -1)){
-            return parseInt(input);
+        if (input.indexOf('//') === 0) {
+            var firstNewLinePosition = input.indexOf('\n');
+
+            customDelimeter = input.substring(2, firstNewLinePosition);
+            reg = new RegExp(customDelimeter);
+            numbers = input.split(reg);
+
+            numbers[0] = 0;
+            numbers[1] = numbers[1].substr(1,numbers[1].length);
+        } else if ((input.indexOf(',') !== -1) || (input.indexOf('\n') !== -1)) {
+            numbers = input.split(/[\n,]/);
         } else {
-            if (input.indexOf('//') === 0) {
-                var firstNewLinePosition = input.indexOf('\n');
-
-                var customDelimeter = input.substring(2, firstNewLinePosition);
-                var reg = new RegExp(customDelimeter);
-
+            for (var i=0; i<input.length; i++){
+                if (isNaN(input[i])) {
+                    hasDelimeters = true;
+                    break;
+                }
+            };
+            if (hasDelimeters){
+                customDelimeter = input[i];
+                reg = new RegExp(customDelimeter);
                 numbers = input.split(reg);
-
-                numbers[0] = 0;
-                numbers[1] = numbers[1].substr(1,numbers[1].length);
             } else {
-                numbers = input.split(/[\n,]/);
-            }
-
-            return numbers.reduce(function(sum, current){
-                return sum + parseInt(current);
-            }, 0);
+                numbers[0] = input;
+            };
         }
+
+        return numbers.reduce(function(sum, current){
+            return sum + parseInt(current);
+        }, 0);
     };
 }
 
