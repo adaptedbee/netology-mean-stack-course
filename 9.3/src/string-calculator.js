@@ -11,7 +11,9 @@ var Calculator = function() {
             return parseInt(input);
         } else {
             numbers = input.split(/[,]/);
-            return parseInt(numbers[0]) + parseInt(numbers[1]);
+            return numbers.reduce(function(sum, current){
+                return sum + parseInt(current);
+            }, 0);
         }
 
     };

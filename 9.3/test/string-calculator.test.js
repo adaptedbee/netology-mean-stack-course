@@ -25,4 +25,12 @@ describe('string calculator should', function() {
 
         assert.equal(sum, 1 + 2);
     });
+
+    it('return sum of unknown amount of numbers', function() {
+        var calculator = new Calculator();
+
+        var sum = calculator.add("1,2,3,4,5");
+
+        assert.equal(sum, 1 + 2 + 3 + 4 + 5);
+    });
 });
