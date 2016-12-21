@@ -57,4 +57,12 @@ describe('string calculator should', function() {
 
         assert.equal(sum, 3);
     });
+
+    it('return an exception if any number is negative', function() {
+        var calculator = new Calculator();
+
+        var sum = calculator.add("1@-2");
+
+        assert.include(sum, "negatives not allowed");
+    });
 });

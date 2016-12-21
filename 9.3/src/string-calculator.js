@@ -7,6 +7,7 @@ var Calculator = function() {
         var customDelimeter;
         var reg;
         var hasDelimeters = false;
+        var negativesString = "";
 
         if (!input) {
             return 0;
@@ -19,7 +20,7 @@ var Calculator = function() {
             reg = new RegExp(customDelimeter);
             numbers = input.split(reg);
 
-            numbers[0] = 0;
+            numbers[0] = "0";
             numbers[1] = numbers[1].substr(1,numbers[1].length);
         } else if ((input.indexOf(',') !== -1) || (input.indexOf('\n') !== -1)) {
             numbers = input.split(/[\n,]/);
@@ -39,9 +40,20 @@ var Calculator = function() {
             };
         }
 
-        return numbers.reduce(function(sum, current){
-            return sum + parseInt(current);
-        }, 0);
+        for (var i = 0; i < numbers.length; i++){
+            if(numbers[i].indexOf('-') !== -1) {
+                negativesString = negativesString + numbers[i];
+                break;
+            }
+        };
+
+        if (negativesString.length == 0){
+           return numbers.reduce(function(sum, current){
+               return sum + parseInt(current);
+           }, 0);
+       } else {
+            return "negatives not allowed: " + negativesString;
+       }
     };
 }
 
