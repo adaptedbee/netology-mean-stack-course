@@ -9,4 +9,12 @@ describe('string calculator should', function() {
 
         assert.equal(result, 0);
     });
+
+    it('return single number if input is that number', function() {
+        var calculator = new Calculator();
+
+        var sum = calculator.add("1");
+
+        assert.equal(sum, 1);
+    });
 });

@@ -7,6 +7,10 @@ var Calculator = function() {
             return 0;
         }
 
+        if (input.indexOf(',') === -1){
+            return parseInt(input);
+        }
+
     };
 }
 
