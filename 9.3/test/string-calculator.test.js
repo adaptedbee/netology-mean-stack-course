@@ -65,4 +65,12 @@ describe('string calculator should', function() {
 
         assert.include(sum, "negatives not allowed");
     });
+
+    it('return all negative numbers in an exception if there are few of them', function() {
+        var calculator = new Calculator();
+
+        var sum = calculator.add("1@-2@-3");
+
+        assert.equal(sum, "negatives not allowed: -2 -3");
+    });
 });

@@ -40,20 +40,19 @@ var Calculator = function() {
             };
         }
 
-        for (var i = 0; i < numbers.length; i++){
+        numbers.forEach(function(item, i, arr) {
             if(numbers[i].indexOf('-') !== -1) {
-                negativesString = negativesString + numbers[i];
-                break;
+                negativesString = negativesString + numbers[i] + " ";
             }
-        };
+        });
 
         if (negativesString.length == 0){
-           return numbers.reduce(function(sum, current){
-               return sum + parseInt(current);
-           }, 0);
-       } else {
-            return "negatives not allowed: " + negativesString;
-       }
+            return numbers.reduce(function(sum, current){
+                return sum + parseInt(current);
+            }, 0);
+        } else {
+             return "negatives not allowed: " + negativesString.substring(0, negativesString.length-1);
+        }
     };
 }
 
