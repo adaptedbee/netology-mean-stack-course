@@ -7,10 +7,10 @@ var Calculator = function() {
             return 0;
         }
 
-        if (input.indexOf(',') === -1){
+        if ((input.indexOf(',') === -1) && (input.indexOf('\n') === -1)){
             return parseInt(input);
         } else {
-            numbers = input.split(/[,]/);
+            numbers = input.split(/[,\n]/);
             return numbers.reduce(function(sum, current){
                 return sum + parseInt(current);
             }, 0);
