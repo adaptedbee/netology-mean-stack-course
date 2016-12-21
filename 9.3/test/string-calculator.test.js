@@ -41,4 +41,12 @@ describe('string calculator should', function() {
 
         assert.equal(sum, 6);
     });
+
+    it('return sum of unknown amount of numbers separated by custom delimeter', function() {
+        var calculator = new Calculator();
+
+        var sum = calculator.add("//;\n1;2");
+
+        assert.equal(sum, 3);
+    });
 });
