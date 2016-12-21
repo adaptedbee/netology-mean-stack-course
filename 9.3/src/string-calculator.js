@@ -9,6 +9,9 @@ var Calculator = function() {
 
         if (input.indexOf(',') === -1){
             return parseInt(input);
+        } else {
+            numbers = input.split(/[,]/);
+            return parseInt(numbers[0]) + parseInt(numbers[1]);
         }
 
     };

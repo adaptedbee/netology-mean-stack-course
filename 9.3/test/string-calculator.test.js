@@ -17,4 +17,12 @@ describe('string calculator should', function() {
 
         assert.equal(sum, 1);
     });
+
+    it('return sum of any two comma separated values', function() {
+        var calculator = new Calculator();
+
+        var sum = calculator.add("1,2");
+
+        assert.equal(sum, 1 + 2);
+    });
 });
