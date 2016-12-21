@@ -1,9 +1,16 @@
+var PokemonAppPokemonsPage = require('../test/page-objects/pokemonapp-pokemonspage');
+
 describe('PokemonApp pokemons page', function() {
+    var pokemonApp = {};
+
+    beforeEach(function() {
+      pokemonApp = new PokemonAppPokemonsPage();
+      pokemonApp.get();
+    });
+
     it('should contain a pokemons list', function() {
-        browser.get('http://localhost:8000/app/#!/pokemons');
+      var pokemonsList = pokemonApp.getPokemonsList();
 
-        var pokemonsList = element.all(by.repeater('singlePokemon in pokemons'));
-
-        expect(pokemonsList.length).not.toEqual(0);
+      expect(pokemonsList.length).not.toEqual(0);
     });
 });

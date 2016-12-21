@@ -1,9 +1,16 @@
+var PokemonAppHomePage = require('../test/page-objects/pokemonapp-homepage');
+
 describe('PokemonApp home page', function() {
+    var pokemonApp = {};
+
+    beforeEach(function() {
+      pokemonApp = new PokemonAppHomePage();
+      pokemonApp.get();
+    });
+
     it('should have a default title', function() {
-        browser.get('http://localhost:8000/app/#!/');
+      var title = pokemonApp.getPageTitle();
 
-        var title = browser.getTitle();
-
-        expect(title).toEqual('PokemonApp');
+      expect(title).toEqual('PokemonApp');
     });
 });

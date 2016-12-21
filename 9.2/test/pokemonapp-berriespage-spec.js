@@ -1,9 +1,16 @@
+var PokemonAppBerriesPage = require('../test/page-objects/pokemonapp-berriespage');
+
 describe('PokemonApp berries page', function() {
+    var pokemonApp = {};
+
+    beforeEach(function() {
+      pokemonApp = new PokemonAppBerriesPage();
+      pokemonApp.get();
+    });
+
     it('should contain a berries list', function() {
-        browser.get('http://localhost:8000/app/#!/berries');
+      var berriesList = pokemonApp.getBerriesList();
 
-        var berriesList = element.all(by.repeater('singleBerry in berries'));
-
-        expect(berriesList.length).not.toEqual(0);
+      expect(berriesList.length).not.toEqual(0);
     });
 });
